@@ -1,10 +1,42 @@
 import express from "express";
-import asyncHandler from "../middleware/asyncHandler.js";
-import Product from "../models/productModel.js";
+import {
+  getProductById,
+  getProducts,
+} from "../controllers/ProductController.js";
 
 const router = express.Router();
+router.route("/").get(getProducts);
+router.route("/:id").get(getProductById);
+export default router;
 
-router.get(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//import asyncHandler from "../middleware/asyncHandler.js";
+//import Product from "../models/productModel.js";
+
+/*router.get(
   "/",
   asyncHandler(async (req, res) => {
     const products = await Product.find({});
@@ -24,6 +56,4 @@ router.get(
     res.status(404);
     throw new Error("Rosource not found");
   })
-);
-
-export default router;
+);*/
