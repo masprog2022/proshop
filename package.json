@@ -9,12 +9,15 @@
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node backend/seeder.js",
+    "data:destroy": "node backend/seeder.js -d"
   },
   "author": "Mauro Manuel",
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "chalk": "^5.3.0",
     "colors": "^1.4.0",
     "express": "^4.19.2",
     "mongoose": "^8.3.5"
