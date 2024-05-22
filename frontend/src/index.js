@@ -11,6 +11,7 @@ import {
 import App from "./App";
 import "./assets/styles/bootstrap.custom.css";
 import "./assets/styles/index.css";
+import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
 import reportWebVitals from "./reportWebVitals";
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomePage />} />
       <Route path="/product/:id" element={<ProductPage />} />
+      <Route path="/cart" element={<CartPage />} />
     </Route>
   )
 );
