@@ -13,6 +13,7 @@ import "./assets/styles/bootstrap.custom.css";
 import "./assets/styles/index.css";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
 import ProductPage from "./pages/ProductPage";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route index={true} path="/" element={<HomePage />} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Route>
   )
 );
