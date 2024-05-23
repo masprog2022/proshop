@@ -75,7 +75,7 @@ const LoginPage = () => {
       <Row className="py-3">
         <Col>
           <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Register
+            New Customer? Register
           </Link>
         </Col>
       </Row>
