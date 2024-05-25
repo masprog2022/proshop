@@ -1,12 +1,13 @@
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { useEffect } from "react";
-import { Card, Col, Image, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import {
+  useDeliverOrderMutation,
   useGetOrderDetailsQuery,
   useGetPaypalClientIdQuery,
   usePayOrderMutation,
@@ -23,6 +24,9 @@ const OrderPage = () => {
 
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
   const { userInfo } = useSelector((state) => state.auth);
+
+  const [deliverOrder, { isLoading: loadingDeliver }] =
+    useDeliverOrderMutation();
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
@@ -89,6 +93,16 @@ const OrderPage = () => {
         return orderID;
       });
   }
+
+  const deliverOrderHandler = async () => {
+    try {
+      await deliverOrder(orderId);
+      refetch();
+      toast.success("Order delivered");
+    } catch (err) {
+      toast.error(err?.data?.message || err.message);
+    }
+  };
 
   return isLoading ? (
     <Loader />
@@ -227,6 +241,22 @@ const OrderPage = () => {
                   )}
                 </ListGroup.Item>
               )}
+
+              {loadingDeliver && <Loader />}
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <Button
+                      type="button"
+                      className="btn btn-block"
+                      onClick={deliverOrderHandler}
+                    >
+                      Mark As Delivery
+                    </Button>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
