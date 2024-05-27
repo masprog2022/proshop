@@ -15,16 +15,18 @@ import "./assets/styles/index.css";
 import AdminRoute from "./components/AdminRoute";
 import PrivateRoute from "./components/PrivateRoute";
 import ShippingPage from "./components/ShippingPage";
+import OrderListPage from "./pages/admin/OrderListPage";
+import ProductListPage from "./pages/admin/ProductListPage";
 import CartPage from "./pages/CartPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import OrderListPage from "./pages/admin/OrderListPage";
 import OrderPage from "./pages/OrderPage";
 import PaymentPage from "./pages/PaymentPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import ProductPage from "./pages/ProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
 
@@ -47,6 +49,7 @@ const router = createBrowserRouter(
 
       <Route path="" element={<AdminRoute />}>
         <Route path="/admin/orderlist" element={<OrderListPage />} />
+        <Route path="/admin/productlist" element={<ProductListPage />} />
       </Route>
     </Route>
   )
