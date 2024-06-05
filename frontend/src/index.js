@@ -28,6 +28,7 @@ import ProductPage from "./pages/ProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import UserListPage from "./pages/admin/UserListPage";
+import UserEditPage from "./pages/admin/UserEditPage";
 
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
@@ -56,6 +57,7 @@ const router = createBrowserRouter(
         <Route path="/admin/productlist" element={<ProductListPage />} />
         <Route path="/admin/productlist" element={<ProductListPage />} />
         <Route path='/admin/userslist' element={<UserListPage />} />
+        <Route path='/admin/user/:id/edit' element={<UserEditPage />} />
       </Route>
     </Route>
   )
