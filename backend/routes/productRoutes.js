@@ -3,13 +3,15 @@ import {
   createProduct,
   getProductById,
   getProducts,
+  updateProduct,
 } from "../controllers/ProductController.js";
 
 import { admin, protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 router.route("/").get(getProducts).post(protect, admin, createProduct);
-router.route("/:id").get(getProductById);
+router.route("/:id").get(getProductById).put(protect, admin, updateProduct);
+
 export default router;
 
 //import asyncHandler from "../middleware/asyncHandler.js";
@@ -33,6 +35,6 @@ router.get(
       return res.json(product);
     }
     res.status(404);
-    throw new Error("Rosource not found");
+    throw new Error("Resource not found");
   })
 );*/
