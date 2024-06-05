@@ -27,6 +27,7 @@ import PlaceOrderPage from "./pages/PlaceOrderPage";
 import ProductPage from "./pages/ProductPage";
 import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
+import UserListPage from "./pages/admin/UserListPage";
 
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
@@ -49,9 +50,12 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="" element={<AdminRoute />}>
+        
         <Route path="/admin/orderlist" element={<OrderListPage />} />
         <Route path="/admin/product/:id/edit" element={<ProductEditPage />} />
         <Route path="/admin/productlist" element={<ProductListPage />} />
+        <Route path="/admin/productlist" element={<ProductListPage />} />
+        <Route path='/admin/userslist' element={<UserListPage />} />
       </Route>
     </Route>
   )
