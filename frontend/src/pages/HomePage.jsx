@@ -1,29 +1,40 @@
-//import axios from "axios";
-//import React, { useEffect, useState } from "react";
-import { Col, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
-import Product from "../components/Product";
-import Paginate from "../components/Paginate";
-import { useGetProductsQuery } from "../slices/productApiSlice";
+import { Row, Col } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
+import { useGetProductsQuery } from '../slices/productApiSlice';
+import { Link } from 'react-router-dom';
+import Product from '../components/Product';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
+import Paginate from '../components/Paginate';
+import ProductCarousel from '../components/ProductCarousel';
 
-const HomePage = () => {
-  const { pageNumber } = useParams();
-  const { data, isLoading, error } = useGetProductsQuery( { pageNumber });
+
+const HomeScreen = () => {
+  const { pageNumber, keyword } = useParams();
+
+  const { data, isLoading, error } = useGetProductsQuery({
+    keyword,
+    pageNumber,
+  });
 
   return (
     <>
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light mb-4'>
+          Go Back
+        </Link>
+      )}
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message 
-        variant="danger">
+        <Message variant='danger'>
           {error?.data?.message || error.error}
         </Message>
       ) : (
         <>
-          {" "}
+      
           <h1>Latest Products</h1>
           <Row>
             {data.products.map((product) => (
@@ -33,26 +44,14 @@ const HomePage = () => {
             ))}
           </Row>
           <Paginate
-             pages={data.pages}
-             page={data.page}
+            pages={data.pages}
+            page={data.page}
+            keyword={keyword ? keyword : ''}
           />
-
-         
-
         </>
       )}
     </>
   );
 };
 
-export default HomePage;
-
-// const [products, setProducts] = useState([]);
-
-/*useEffect(() => {
-    const fetchProducts = async () => {
-      const { data } = await axios.get("/api/products");
-      setProducts(data);
-    };
-    fetchProducts();
-  }, []); */
+export default HomeScreen;

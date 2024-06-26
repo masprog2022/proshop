@@ -29,6 +29,7 @@ import ProfilePage from "./pages/ProfilePage";
 import RegisterPage from "./pages/RegisterPage";
 import UserListPage from "./pages/admin/UserListPage";
 import UserEditPage from "./pages/admin/UserEditPage";
+import {HelmetProvider} from "react-helmet-async";
 
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
@@ -37,7 +38,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomePage />} />
+      <Route path="/search/:keyword" element={<HomePage />} />
       <Route path="/page/:pageNumber" element={<HomePage />} />
+      <Route path="/search/:keyword/page/:pageNumber" element={<HomePage />} />
       <Route path="/product/:id" element={<ProductPage />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -68,14 +71,16 @@ const router = createBrowserRouter(
   )
 );
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PayPalScriptProvider deferLoading={true}>
-        <RouterProvider router={router} />
-      </PayPalScriptProvider>
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <PayPalScriptProvider deferLoading={true}>
+          <RouterProvider router={router} />
+        </PayPalScriptProvider>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );
 
